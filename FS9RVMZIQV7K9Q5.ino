@@ -3,7 +3,7 @@ int leftB = 10;
 int rightA = 11; 
 int rightB = 12; 
 int vel = 255; // Speed of motor (0-255)
-int initialState = 0; // initialState
+int initialState = 0; // initialState of motor
 
 void setup() { 
 Serial.begin(9600); // initiates the serial port for communication with Bluetooth
