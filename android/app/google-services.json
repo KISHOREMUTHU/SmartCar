@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "288841479030",
+    "project_id": "arduino-car-8ca6d",
+    "storage_bucket": "arduino-car-8ca6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288841479030:android:41775166571fa4fa8bc057",
+        "android_client_info": {
+          "package_name": "com.example.servo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288841479030-h3fvihcne9t4mdoihl00gldbk35gr8k9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.servo_app",
+            "certificate_hash": "67313b2232e07d3785d4c6fbf3c0ceeb1e2672b4"
+          }
+        },
+        {
+          "client_id": "288841479030-ihd7dib01876niro7bftbsg6qvlvprvh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoIeg_T0w6wV9XaneccnWkYQs42c1LtB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288841479030-ihd7dib01876niro7bftbsg6qvlvprvh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
