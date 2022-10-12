@@ -72,7 +72,14 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         body: Container(
             height:MediaQuery.of(context).size.height ,
-            color: Colors.black87,
+            decoration: BoxDecoration(
+              color: Colors.black87,
+
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/login_bg.gif')
+              )
+            ),
             child: Center(
                 child: Column(children: [
                      Container(

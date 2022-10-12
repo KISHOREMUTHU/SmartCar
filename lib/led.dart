@@ -6,6 +6,7 @@ import 'package:control_button/control_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ChatPage extends StatefulWidget {
   final BluetoothDevice server;
@@ -115,77 +116,90 @@ class _ChatPage extends State<ChatPage> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
           title: (isConnecting
-              ? Text('Connecting chat to ' + widget.server.name + '...')
+              ? Text('Connecting ' + widget.server.name + '...', style: GoogleFonts.montserrat(color: Colors.black),)
               : isConnected
-                  ? Text('Live chat with ' + widget.server.name)
-                  : Text('Chat log with ' + widget.server.name))),
+                  ? Text('Live with ' + widget.server.name, style: GoogleFonts.montserrat(color: Colors.black),)
+                  : Text('Log with ' + widget.server.name, style: GoogleFonts.montserrat(color: Colors.black),))),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-              height: 100,
-            ),
-            ControlButton(
-              sectionOffset: FixedAngles.Zero,
-              externalDiameter: 300,
-              internalDiameter: 120,
-              dividerColor: Colors.greenAccent,
-              elevation: 2,
-              externalColor: Colors.green[500],
-              internalColor: Colors.grey[300],
-              mainAction: () {
-                _sendMessage('3');
-              },
-              sections: [
-                () => _sendMessage('2'),
-                () => _sendMessage('1'),
-                () => _sendMessage('4'),
-                () => _sendMessage('6'),
-                () => _sendMessage('5'),
-                () => _sendMessage('7'),
-              ],
-            ),
-          // Flexible(
-          //    child: ListView(
-          //      padding: const EdgeInsets.all(12.0),
-          //          controller: listScrollController,
-          //         children: list),
-          //    ),
+        child: Container(
+          height:MediaQuery.of(context).size.height ,
+          decoration: BoxDecoration(
+              color: Colors.black87,
+
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/login_bg.gif')
+              )
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                height: 100,
+              ),
+              ControlButton(
+                sectionOffset: FixedAngles.Zero,
+                externalDiameter: 300,
+                internalDiameter: 120,
+                dividerColor: Colors.greenAccent,
+                elevation: 2,
+                externalColor: Colors.green[500],
+                internalColor: Colors.grey[300],
+                mainAction: () {
+                  _sendMessage('3');
+                },
+                sections: [
+                  () => _sendMessage('2'),
+                  () => _sendMessage('1'),
+                  () => _sendMessage('4'),
+                  () => _sendMessage('6'),
+                  () => _sendMessage('5'),
+                  () => _sendMessage('7'),
+                ],
+              ),
+            // Flexible(
+            //    child: ListView(
+            //      padding: const EdgeInsets.all(12.0),
+            //          controller: listScrollController,
+            //         children: list),
+            //    ),
 
 
-            Row(
-              children: <Widget>[
-                Flexible(
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 16.0),
-                    child: TextField(
-                      style: const TextStyle(fontSize: 15.0),
-                      controller: textEditingController,
-                      decoration: InputDecoration.collapsed(
-                        hintText: isConnecting
-                            ? 'Wait until connected ...'
-                            : isConnected
-                                ? 'Device Connected ...'
-                                : 'Chat got disconnected ',
-                        hintStyle: const TextStyle(color: Colors.grey),
+              Row(
+                children: <Widget>[
+                  Flexible(
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 16.0),
+                      child: TextField(
+                        style: const TextStyle(fontSize: 15.0),
+                        controller: textEditingController,
+                        decoration: InputDecoration.collapsed(
+                          hintText: isConnecting
+                              ? 'Wait until connected ...'
+                              : isConnected
+                                  ? 'Device Connected ...'
+                                  : 'Chat got disconnected ',
+                          hintStyle: GoogleFonts.montserrat(color: Colors.black, fontSize:17, fontWeight: FontWeight.bold),
+                        ),
+                        enabled: isConnected,
                       ),
-                      enabled: isConnected,
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.all(8.0),
-                  child: IconButton(
-                      icon: const Icon(Icons.send),
-                      onPressed: isConnected
-                          ? () => _sendMessage(textEditingController.text)
-                          : null),
-                ),
-              ],
-            )
-          ],
+                  Container(
+                    margin: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                        icon: const Icon(Icons.send),
+                        onPressed: isConnected
+                            ? () => _sendMessage(textEditingController.text)
+                            : null),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

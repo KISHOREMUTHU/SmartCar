@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:servo_app/connection.dart';
 import 'package:servo_app/led.dart';
 import 'package:provider/provider.dart';
@@ -88,31 +89,118 @@ class MyApp extends StatelessWidget {
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    User user = FirebaseAuth.instance.currentUser;
     return SafeArea(
         child: Scaffold(
+          drawer: Drawer(
+            child: ListView(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 30),
+                      CircleAvatar(
+                        radius: 50,
+                        backgroundColor: Theme.of(context).primaryColor,
+                        child: ClipOval(
+                            child: Image.network(user.photoURL.toString())),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        child: Text(
+                          "Welcome !!!",
+                          textAlign: TextAlign.start,
+                          style: GoogleFonts.montserrat(
+                            color: Colors.black,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Center(
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.7,
+                                child: Center(
+                                  child: Text(
+                                    user.displayName.toString(),
+                                    textAlign: TextAlign.start,
+                                    style: GoogleFonts.montserrat(
+                                      color: Colors.greenAccent.shade700,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.74,
+                  decoration: BoxDecoration(
+                    color: Colors.white70,
+                  ),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 10),
+
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Connection'),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color:Colors.black),
+        title: Text('Connection', style: GoogleFonts.montserrat(color:Colors.black)),
         actions: [
           IconButton( onPressed: () {
             final provider =
             Provider.of<GoogleSignInProvider>(context, listen: false);
             provider.logout();
-          }, icon: FaIcon(FontAwesomeIcons.backwardFast))
+          }, icon:Icon(Icons.logout_rounded))
         ],
       ),
-      body: SelectBondedDevicePage(
-        onChatPage: (device1) {
-          BluetoothDevice device = device1;
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return ChatPage(server: device);
-              },
-            ),
-          );
-        },
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+            color: Colors.black87,
+
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/login_bg.gif')
+            )
+        ),
+        child: SelectBondedDevicePage(
+          onChatPage: (device1) {
+            BluetoothDevice device = device1;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return ChatPage(server: device);
+                },
+              ),
+            );
+          },
+        ),
       ),
     ));
   }
